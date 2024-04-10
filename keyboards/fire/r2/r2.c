@@ -39,6 +39,15 @@ void eeconfig_init_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case KC_F19: // ——————————全灭
+            if (record->event.pressed) {
+                user_config.rgb_abc    = true;
+                user_config.rgb_line   = true;
+                user_config.rgb_back   = true;
+                user_config.rgb_line07 = true;
+                eeconfig_update_user(user_config.raw);
+            }
+            return true;
         case KC_F20://——————————轴灯
             if (record->event.pressed) {
                 if (user_config.rgb_abc) {
@@ -49,17 +58,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_user(user_config.raw);
             }
             return true;
-        case KC_F21://——————————静止
-            if (record->event.pressed) {
-                if (user_config.rgb_back) {
-                    user_config.rgb_back = false;
-                } else {
-                    user_config.rgb_back = true;
-                }
-                eeconfig_update_user(user_config.raw);
-            }
-            return true;
-        case KC_F22://——————————条灯
+        case KC_F21://——————————条灯
             if (record->event.pressed) {
                 if (user_config.rgb_line) {
                     user_config.rgb_line = false;
@@ -69,7 +68,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_user(user_config.raw);
             }
             return true;
-        case KC_F23://——————————彩虹
+        case KC_F22://——————————彩虹
             if (record->event.pressed) {
                 if (user_config.rgb_line07) {
                     user_config.rgb_line07 = false;
@@ -79,7 +78,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_user(user_config.raw);
             }
             return true;
-        case KC_F24://——————————彩虹变化
+        case KC_F23://——————————彩虹变化
             if (record->event.pressed) {
                 if (user_config.rgb_line255 > 190) {
                     user_config.rgb_line255 -= 190;
@@ -95,14 +94,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool rgb_matrix_indicators_kb(void) {
-    if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(39, 0, 255, 0);
-    }
-
     if (!rgb_matrix_indicators_user()) {
         return false;
     }
-
+    if (host_keyboard_led_state().caps_lock) {
+        rgb_matrix_set_color(39, 0, 255, 0);
+    }
     if (user_config.rgb_abc) { // ————————————轴座开关
         for (uint8_t i = 8; i < 75; ++i) {
             if (i == 39 && host_keyboard_led_state().caps_lock) {
