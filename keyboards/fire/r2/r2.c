@@ -23,7 +23,7 @@ typedef union {
 
 user_config_t user_config;
 
-void          keyboard_post_init_user(void) {
+void keyboard_post_init_user(void) {
     user_config.raw = eeconfig_read_user();
 }
 
@@ -47,7 +47,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 user_config.rgb_line07 = true;
                 eeconfig_update_user(user_config.raw);
             }
-            return true;
+            break;
         case KC_F20://——————————轴灯
             if (record->event.pressed) {
                 if (user_config.rgb_abc) {
@@ -57,7 +57,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 eeconfig_update_user(user_config.raw);
             }
-            return true;
+            break;
         case KC_F21://——————————条灯
             if (record->event.pressed) {
                 if (user_config.rgb_line) {
@@ -67,7 +67,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 eeconfig_update_user(user_config.raw);
             }
-            return true;
+            break;
         case KC_F22://——————————彩虹
             if (record->event.pressed) {
                 if (user_config.rgb_line07) {
@@ -77,7 +77,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 eeconfig_update_user(user_config.raw);
             }
-            return true;
+            break;
         case KC_F23://——————————彩虹变化
             if (record->event.pressed) {
                 if (user_config.rgb_line255 > 190) {
@@ -87,10 +87,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 eeconfig_update_user(user_config.raw);
             }
-            return true;
-        default:
-            return true;
+            break;
     }
+    return true;
 }
 
 bool rgb_matrix_indicators_kb(void) {
@@ -107,11 +106,6 @@ bool rgb_matrix_indicators_kb(void) {
             } else {
                 rgb_matrix_set_color(i, 0, 0, 0);
             }
-        }
-    }
-    if (user_config.rgb_back) { // ————————————底灯开关
-        for (uint8_t i = 75; i < 118; ++i) {
-            rgb_matrix_set_color(i, 0, 0, 0);
         }
     }
     if (user_config.rgb_line) { // ————————————灯条开关
