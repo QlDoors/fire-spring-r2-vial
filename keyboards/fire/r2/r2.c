@@ -39,68 +39,54 @@ void eeconfig_init_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_F19: // ——————————全灭
-            if (record->event.pressed) {
-                user_config.rgb_abc    = true;
-                user_config.rgb_line   = true;
-                user_config.rgb_back   = true;
-                user_config.rgb_line07 = true;
-                eeconfig_update_user(user_config.raw);
-            }
-            return true;
-        case KC_F20://——————————轴灯
+        case KC_F19://——————————轴灯
             if (record->event.pressed) {
                 if (user_config.rgb_abc) {
                     user_config.rgb_abc = false;
-                    eeconfig_update_user(user_config.raw);
                 } else {
                     user_config.rgb_abc = true;
-                    eeconfig_update_user(user_config.raw);
                 }
+                eeconfig_update_user(user_config.raw);
             }
             return true;
-        case KC_F21://——————————静止
+        case KC_F20://——————————静止
             if (record->event.pressed) {
                 if (user_config.rgb_back) {
                     user_config.rgb_back = false;
-                    eeconfig_update_user(user_config.raw);
                 } else {
                     user_config.rgb_back = true;
-                    eeconfig_update_user(user_config.raw);
                 }
+                eeconfig_update_user(user_config.raw);
             }
             return true;
-        case KC_F22://——————————条灯
+        case KC_F21://——————————条灯
             if (record->event.pressed) {
                 if (user_config.rgb_line) {
                     user_config.rgb_line = false;
-                    eeconfig_update_user(user_config.raw);
                 } else {
                     user_config.rgb_line = true;
-                    eeconfig_update_user(user_config.raw);
                 }
+                eeconfig_update_user(user_config.raw);
             }
             return true;
-        case KC_F23://——————————彩虹
+        case KC_F22://——————————彩虹
             if (record->event.pressed) {
                 if (user_config.rgb_line07) {
                     user_config.rgb_line07 = false;
-                    eeconfig_update_user(user_config.raw);
                 } else {
                     user_config.rgb_line07 = true;
-                    eeconfig_update_user(user_config.raw);
                 }
+                eeconfig_update_user(user_config.raw);
             }
             return true;
-        case KC_F24://——————————彩虹变化
+        case KC_F23://——————————彩虹变化
             if (record->event.pressed) {
                 if (user_config.rgb_line255 > 190) {
                     user_config.rgb_line255 -= 190;
-                    eeconfig_update_user(user_config.raw);
                 } else {
                     user_config.rgb_line255 += 7;
-                    eeconfig_update_user(user_config.raw);
                 }
+                eeconfig_update_user(user_config.raw);
             }
             return true;
         default:
