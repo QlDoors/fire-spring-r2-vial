@@ -95,11 +95,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool rgb_matrix_indicators_kb(void) {
-    if (!rgb_matrix_indicators_user()) {
-        return false;
-    }
     if (host_keyboard_led_state().caps_lock) {
         rgb_matrix_set_color(39, 0, 255, 0);
+    }
+
+    if (!rgb_matrix_indicators_user()) {
+        return false;
     }
 
     if (user_config.rgb_abc) { // ————————————轴座开关
