@@ -1,6 +1,33 @@
 {
     "name": "RGB-spring",
     "lighting": "vialrgb",
+    "customKeycodes": [
+        {
+            "name": "RGB\nDWN",
+            "title": "Turn down all LEDs to 0",
+            "shortName": "R_DWN"
+        },
+        {
+            "name": "RGB\nKEY_TOG",
+            "title": "Key LEDs toggle",
+            "shortName": "R_KEY_TOG"
+        },
+        {
+            "name": "RGB\nLN_TOG",
+            "title": "Line LEDs toggle",
+            "shortName": "R_LN_TOG"
+        },
+        {
+            "name": "RRG RB\nTOG",
+            "title": "LEDs rainbow toggle",
+            "shortName": "R_RB_TOG"
+        },
+        {
+            "name": "RGB RB\nADJ",
+            "title": "LDs rainbow adjust",
+            "shortName": "R_RB_ADJ"
+        }
+    ],
     "matrix": {
         "rows": 5,
         "cols": 15

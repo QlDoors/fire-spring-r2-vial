@@ -39,7 +39,7 @@ void eeconfig_init_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_F19: // ——————————全灭
+        case R_DWN: // ——————————全灭
             if (record->event.pressed) {
                 user_config.rgb_abc    = true;
                 user_config.rgb_line   = true;
@@ -48,7 +48,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_user(user_config.raw);
             }
             break;
-        case KC_F20://——————————轴灯
+        case R_KEY_TOG://——————————轴灯
             if (record->event.pressed) {
                 if (user_config.rgb_abc) {
                     user_config.rgb_abc = false;
@@ -58,7 +58,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_user(user_config.raw);
             }
             break;
-        case KC_F21://——————————条灯
+        case R_LN_TOG://——————————条灯
             if (record->event.pressed) {
                 if (user_config.rgb_line) {
                     user_config.rgb_line = false;
@@ -68,7 +68,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_user(user_config.raw);
             }
             break;
-        case KC_F22://——————————彩虹
+        case R_RB_TOG://——————————彩虹
             if (record->event.pressed) {
                 if (user_config.rgb_line07) {
                     user_config.rgb_line07 = false;
@@ -78,7 +78,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_user(user_config.raw);
             }
             break;
-        case KC_F23://——————————彩虹变化
+        case R_RB_ADJ://——————————彩虹变化
             if (record->event.pressed) {
                 if (user_config.rgb_line255 > 190) {
                     user_config.rgb_line255 -= 190;
